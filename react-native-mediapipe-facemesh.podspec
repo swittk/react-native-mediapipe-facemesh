@@ -16,4 +16,7 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm}"
 
   s.dependency "React-Core"
+  s.vendored_frameworks = "ios/FaceMeshIOSLibFramework.xcframework"
+  s.dependency "PromisesObjC"
+#  s.public_header_files = 'ios/FaceMeshIOSLibFramework.xcframework/Headers/*.h'
 end
