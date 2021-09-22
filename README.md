@@ -2,6 +2,10 @@
 
 Mediapipe Facemesh fplugin or React Native
 
+WIP
+Currently can build, but crashes due to `glog` mutex somehow being stupid and throwing SIGABRT (abort()) when calling inside the react native bridge.
+I suspect MediaPipe usage of glog might conflict with React Native's extensive usage.
+
 ## Installation
 
 ```sh

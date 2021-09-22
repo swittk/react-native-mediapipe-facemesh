@@ -96,8 +96,8 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@react-native-community",
-    ],
+      "@react-native-community"
+    ]
   },
   "eslintIgnore": [
     "node_modules/",

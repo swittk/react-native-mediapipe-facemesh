@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FaceMeshIOSLibFramework.h"
+#import <FaceMeshIOSLibFramework/FaceMeshIOSLibFramework.h>
 #import "FBLPromises.h"
 
 NS_ASSUME_NONNULL_BEGIN
