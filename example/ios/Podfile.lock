@@ -23,6 +23,7 @@ PODS:
   - ExpoModulesCore/Interfaces (0.2.0):
     - ExpoModulesCore/Core
     - UMCore
+  - FaceMeshIOSLibFramework (0.5.0)
   - FBLazyVector (0.63.4)
   - FBReactNativeSpec (0.63.4):
     - Folly (= 2020.01.13.00)
@@ -209,6 +210,7 @@ PODS:
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
   - react-native-mediapipe-facemesh (0.1.0):
+    - FaceMeshIOSLibFramework
     - PromisesObjC
     - React-Core
   - React-RCTActionSheet (0.63.4):
@@ -324,6 +326,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - FaceMeshIOSLibFramework
     - PromisesObjC
 
 EXTERNAL SOURCES:
@@ -408,6 +411,7 @@ SPEC CHECKSUMS:
   EXImageLoader: d3531a3fe530b22925c19977cb53bb43e3821fe6
   EXImagePicker: 414a3663910fd6604248e84c9c77a0501ae0d18b
   ExpoModulesCore: 2734852616127a6c1fc23012197890a6f3763dc7
+  FaceMeshIOSLibFramework: 3ee7703d7694442df74a4d722b14a415d8da2d3f
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
@@ -423,7 +427,7 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-mediapipe-facemesh: f4990df3fa69998428ec2d0661c00fc10f3bf399
+  react-native-mediapipe-facemesh: fc28ac6ba23a46e60991cdaa4ec9571906433196
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -442,4 +446,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a377a14c0f6f5468056335c55825806eda3bf793
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

@@ -137,7 +137,7 @@ CVPixelBufferRef CreateCVPixelBufferFromCGImage(
         NSString *path = [filePath hasPrefix:@"file://"] ? [filePath substringFromIndex:7] : filePath;
         UIImage *image = [UIImage imageWithContentsOfFile:path];
         NSLog(@"image %@", image);
-        CVPixelBufferRef buffer = CreateCVPixelBufferFromCGImage(image.CGImage);//[self createIOSurfaceBackedPixelBufferFromCGImage:image.CGImage];
+        CVPixelBufferRef buffer = CreateCVPixelBufferFromCGImage([self orientationUpImage:image].CGImage);//[self createIOSurfaceBackedPixelBufferFromCGImage:image.CGImage];
         NSLog(@"buffer %ld", CVPixelBufferGetWidth(buffer));
         [faceMesh processVideoFrame:buffer];
         NSLog(@"sent in frame, the delegate is %@", faceMesh.delegate);
@@ -162,7 +162,7 @@ CVPixelBufferRef CreateCVPixelBufferFromCGImage(
 -(void)processImagesQueuer:(NSArray <UIImage *>*)images {
     FaceMeshIOSLib *faceMesh = self.faceMesh;
     for(UIImage *image in images) {
-        CVPixelBufferRef buffer = CreateCVPixelBufferFromCGImage(image.CGImage);
+        CVPixelBufferRef buffer = CreateCVPixelBufferFromCGImage([self orientationUpImage:image].CGImage);
         [faceMesh processVideoFrame:buffer];
         CVPixelBufferRelease(buffer);
     }
@@ -230,5 +230,22 @@ CVPixelBufferRef CreateCVPixelBufferFromCGImage(
     CGImageRelease(image);
     return pxbuffer;
 }
+
+-(UIImage *)orientationUpImage:(UIImage *)image {
+    if(image.imageOrientation == UIImageOrientationUp) {
+        return image;
+    }
+    CGSize size = image.size;
+    if(image.scale != 1) {
+        size.width *= image.scale;
+        size.height *= image.scale;
+    }
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 @end

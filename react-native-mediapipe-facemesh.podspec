@@ -17,7 +17,8 @@ Pod::Spec.new do |s|
 
   s.dependency "React-Core"
   s.dependency "PromisesObjC"
-  s.vendored_frameworks = "Frameworks/FaceMeshIOSLibFramework.xcframework"
+  s.dependency "FaceMeshIOSLibFramework"
+  # s.vendored_frameworks = "Frameworks/FaceMeshIOSLibFramework.xcframework"
   # s.user_target_xcconfig = { 'OTHER_LDFLAGS' => '-all_load' }
   # s.user_target_xcconfig = { 'OTHER_LDFLAGS' => '-force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps' }
   # s.public_header_files = 'Frameworks/FaceMeshIOSLibFramework.xcframework/Headers/*.h'

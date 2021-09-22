@@ -57,7 +57,8 @@ RCT_REMAP_METHOD(tryJustAlloc,
                  withRejecter:(RCTPromiseRejectBlock)reject)
 {
     if(argumentsDict[@"lib"]) {
-        [self whatdafak];
+        FaceMeshIOSLib *lib = [FaceMeshIOSLib new];
+        NSLog(@"allocated lib successfully");
         //        [self performSelector:@selector(whatdafak) withObject:nil afterDelay:10];
     }
     else {
@@ -65,13 +66,6 @@ RCT_REMAP_METHOD(tryJustAlloc,
         NSLog(@"allocated runner successfully");
     }
 }
-
--(void)whatdafak {
-    NSLog(@"whatdafak called");
-    FaceMeshIOSLib *lib = [FaceMeshIOSLib new];
-    NSLog(@"allocated lib successfully");
-}
-
 
 RCT_REMAP_METHOD(runFaceMeshWithBase64Images,
                  runFaceMeshWithBase64Images:(nonnull NSDictionary *)argumentsDict
