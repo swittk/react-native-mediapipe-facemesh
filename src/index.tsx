@@ -6,13 +6,16 @@ type MediapipeFacemeshType = {
    * @param args files: URLs of files to process
    * @returns a [frames, faces, points, 3 (point_x_y_z)] tensor (array)
    */
-  runFaceMeshWithFiles(args: { files: string[] }): Promise<number[][][][]>;
+  runFaceMeshWithFiles(args: { files: string[], runner?: number }): Promise<number[][][][]>;
   /**
    * @param base64Images Base 64 images of frames wanted to process
    * @returns a [frames, faces, points, 3 (point_x_y_z)] tensor (array)
    */
-  runFaceMeshWithBase64Images(args: { base64Images: string[] }): Promise<number[][][][]>;
+  runFaceMeshWithBase64Images(args: { base64Images: string[], runner?: number }): Promise<number[][][][]>;
 
+  listRunners(): Promise<number[]>;
+
+  freeRunner(args: {runner: number}): Promise<number[]>;
 
   /** Debug */
   tryJustAlloc(args: { lib?: boolean }): Promise<void>;

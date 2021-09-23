@@ -3,10 +3,18 @@
 #import "ChunkBasedFaceMeshRunner.h"
 
 @implementation MediapipeFacemesh {
+    NSMutableDictionary <NSNumber *, ChunkBasedFaceMeshRunner *>*runners;
     ChunkBasedFaceMeshRunner *runner;
 }
 
 RCT_EXPORT_MODULE()
+
+-(id)init {
+    if(self = [super init]) {
+        runners = [NSMutableDictionary new];
+    }
+    return self;
+}
 
 -(BOOL)requiresMainQueueSetup {
     return YES;
@@ -35,8 +43,20 @@ RCT_REMAP_METHOD(runFaceMeshWithFiles,
         reject(@"NO_FILE_PATH", @"No File Path specified", error);
         return;
     }
-    runner = [ChunkBasedFaceMeshRunner new];
-    [[[runner processFilesAtPaths:filePaths]
+    NSNumber *runnerID = argumentsDict[@"runner"];
+    ChunkBasedFaceMeshRunner *myrunner;
+    if(runnerID) {
+        myrunner = runners[runnerID];
+        if(!myrunner) {
+            myrunner = [ChunkBasedFaceMeshRunner new];
+            runners[runnerID] = myrunner;
+        }
+    }
+    else {
+        runner = [ChunkBasedFaceMeshRunner new];
+        myrunner = runner;
+    }
+    [[[myrunner processFilesAtPaths:filePaths]
       then:^id _Nullable(NSArray<NSArray<NSArray<NSArray<NSNumber *>*>*>*>* value) {
         NSLog(@"result from runner %@", value);
         resolve(value);
@@ -44,6 +64,30 @@ RCT_REMAP_METHOD(runFaceMeshWithFiles,
     }] catch:^(NSError * _Nonnull error) {
         reject(@"SKMediapipeLibraryError", @"An error occured in Switt's Mediapipe Library", error);
     }];
+}
+
+RCT_REMAP_METHOD(listRunners,
+                 listRunners:(nullable NSDictionary *)argumentsDict
+                 withResolver:(RCTPromiseResolveBlock)resolve
+                 withRejecter:(RCTPromiseRejectBlock)reject)
+{
+//    argumentsDict[@""];
+    resolve([runners allKeys]);
+}
+
+RCT_REMAP_METHOD(freeRunner,
+                 freeRunner:(nonnull NSDictionary *)argumentsDict
+                 withResolver:(RCTPromiseResolveBlock)resolve
+                 withRejecter:(RCTPromiseRejectBlock)reject)
+{
+    NSNumber *runnerID = argumentsDict[@"runner"];
+    if(!runnerID) {
+        NSError *error = [[NSError alloc] initWithDomain:@"SKRNFaceMesh" code:404 userInfo:nil];
+        reject(@"NO_RUNNER_ID", @"No runner ID given", error);
+        return;
+    }
+    [runners removeObjectForKey:runnerID];
+    resolve([runners allKeys]);
 }
 
 // This is for checking the crash that occurs whenever I allocate FaceMeshIOSLib (  `[FaceMeshIOSLib new]`  )
@@ -83,8 +127,20 @@ RCT_REMAP_METHOD(runFaceMeshWithBase64Images,
     for(NSString *b64 in base64Images) {
         [images addObject:[self decodeBase64ToImage:b64]];
     }
-    runner = [ChunkBasedFaceMeshRunner new];
-    [[[runner processImages:images]
+    NSNumber *runnerID = argumentsDict[@"runner"];
+    ChunkBasedFaceMeshRunner *myrunner;
+    if(runnerID) {
+        myrunner = runners[runnerID];
+        if(!myrunner) {
+            myrunner = [ChunkBasedFaceMeshRunner new];
+            runners[runnerID] = myrunner;
+        }
+    }
+    else {
+        runner = [ChunkBasedFaceMeshRunner new];
+        myrunner = runner;
+    }
+    [[[myrunner processImages:images]
       then:^id _Nullable(NSArray<NSArray<NSArray<NSArray<NSNumber *>*>*>*>* value) {
         NSLog(@"result from runner %@", value);
         resolve(value);
