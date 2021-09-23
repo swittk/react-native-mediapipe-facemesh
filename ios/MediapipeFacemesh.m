@@ -58,7 +58,7 @@ RCT_REMAP_METHOD(runFaceMeshWithFiles,
     }
     [[[myrunner processFilesAtPaths:filePaths]
       then:^id _Nullable(NSArray<NSArray<NSArray<NSArray<NSNumber *>*>*>*>* value) {
-        NSLog(@"result from runner %@", value);
+//        NSLog(@"result from runner %@", value);
         resolve(value);
         return nil;
     }] catch:^(NSError * _Nonnull error) {
@@ -142,7 +142,7 @@ RCT_REMAP_METHOD(runFaceMeshWithBase64Images,
     }
     [[[myrunner processImages:images]
       then:^id _Nullable(NSArray<NSArray<NSArray<NSArray<NSNumber *>*>*>*>* value) {
-        NSLog(@"result from runner %@", value);
+//        NSLog(@"result from runner %@", value);
         resolve(value);
         return nil;
     }] catch:^(NSError * _Nonnull error) {
