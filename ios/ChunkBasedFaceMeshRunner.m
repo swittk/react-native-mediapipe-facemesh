@@ -106,7 +106,7 @@ CVPixelBufferRef CreateCVPixelBufferFromCGImage(
 }
 -(void)didReceiveFaces:(NSArray<NSArray<FaceMeshIOSLibFaceLandmarkPoint *>*>*)faces {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"received faces %@", faces);
+//        NSLog(@"received faces %@", faces);
         [chunkFaceResults addObject:[self numberOnlyLandmarksForFrameOut:faces]];
         if(chunkFaceResults.count >= self.numInRunningChunk) {
             // Done
@@ -136,11 +136,11 @@ CVPixelBufferRef CreateCVPixelBufferFromCGImage(
     for(NSString *filePath in filePaths) {
         NSString *path = [filePath hasPrefix:@"file://"] ? [filePath substringFromIndex:7] : filePath;
         UIImage *image = [UIImage imageWithContentsOfFile:path];
-        NSLog(@"image %@", image);
+//        NSLog(@"image %@", image);
         CVPixelBufferRef buffer = CreateCVPixelBufferFromCGImage([self orientationUpImage:image].CGImage);//[self createIOSurfaceBackedPixelBufferFromCGImage:image.CGImage];
-        NSLog(@"buffer %ld", CVPixelBufferGetWidth(buffer));
+//        NSLog(@"buffer %ld", CVPixelBufferGetWidth(buffer));
         [faceMesh processVideoFrame:buffer];
-        NSLog(@"sent in frame, the delegate is %@", faceMesh.delegate);
+//        NSLog(@"sent in frame, the delegate is %@", faceMesh.delegate);
         CVPixelBufferRelease(buffer);
     }
 }
